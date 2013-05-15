@@ -44,7 +44,7 @@ class Missile(object):
             self.damage * dmg_bonus * min(
                 1,
                 (sdf),
-                (sdf * (self.velocity / vt)) ** (math.log(self.reduction) / math.log(5.5))
+                (vdf)
             )
         )
         effect = (damage / math.floor(self.damage * dmg_bonus)) * 100
