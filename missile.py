@@ -1,7 +1,10 @@
+#!/usr/bin/env python
+
 import math
 
-class Skills(object):
+class Missile_bonus(object):
     def __init__(self):
+        # Skills
         self.cruise_missile = 4
         self.guided_missile_precision = 3
         self.missile_bombartment = 2
@@ -11,13 +14,18 @@ class Skills(object):
         self.target_navigation_prediction = 4
         self.warhead_upgrades = 3
 
+        # Equipment/Modules
+        self.large_warhead_rigor_catalyst_I = 3
+
     def damage_bonus(self):
         dmg_bonus = self.cruise_missile * 5 + self.warhead_upgrades * 2
         return dmg_bonus / 100 + 1
 
     def radius_bonus(self):
         rad_bonus = self.guided_missile_precision * 5
-        return 1 - (rad_bonus / 100)
+        rad_bonus = (100 - rad_bonus) / 100
+        rad_bonus = rad_bonus * (((100 - 15) / 100) ** self.large_warhead_rigor_catalyst_I)
+        return rad_bonus
 
     def velocity_bonus(self):
         vel_bonus = self.target_navigation_prediction * 10
@@ -50,7 +58,7 @@ class Missile(object):
         effect = (damage / math.floor(self.damage * dmg_bonus)) * 100
         return damage, effect, sdf, vdf
 
-skill = Skills()
+bonus = Missile_bonus()
 missiles = []
 missiles.append(Missile("Cruise Missile", 300, 300, 69, 4.5))
 missiles.append(Missile("Caldari Navy Cruise Missile", 345, 300, 69, 4.5))
@@ -77,13 +85,13 @@ def damage_matrix(ship, signature, vt):
         damage, effect, sdf, vdf = missile.calculate_damage(
             signature,
             vt,
-            skill.damage_bonus(),
-            skill.radius_bonus(),
-            skill.velocity_bonus()
+            bonus.damage_bonus(),
+            bonus.radius_bonus(),
+            bonus.velocity_bonus()
         )
         print(
             "{0:<3}{1:<27}{2:>3} hp ({3:>6.2f}%) (SigF: {4:.2f}, VelF: {5:.2f})".format(
-                "", "with skills:", damage, effect, sdf, vdf
+                "", "with bonus:", damage, effect, sdf, vdf
             )
         )
 
