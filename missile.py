@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 
 import math
+from optparse import OptionParser
+
+parser = OptionParser()
+parser.add_option("-c", "--cruise-missile",
+        action="store_true", dest="cruise_missile", default=False,
+        help="Show Cruise Missile stats")
+
+(options, args) = parser.parser_args()
 
 class Missile_bonus(object):
     def __init__(self):
