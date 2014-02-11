@@ -7,6 +7,9 @@ parser = OptionParser()
 parser.add_option("-c", "--cruise-missile",
         action="store_true", dest="cruise_missile", default=False,
         help="Show Cruise Missile stats")
+parser.add_option("-a", "--heavy-assault-missile",
+        action="store_true", dest="heavy_assault_missile", default=False,
+        help="Show Heavy Assault Missile stats")
 
 (options, args) = parser.parse_args()
 
@@ -114,11 +117,18 @@ class Missile(object):
 
 bonus = Missile_bonus()
 missiles = []
-missiles.append(Missile("Cruise Missile", 300, 300, 69, 4.5, 16.55))
-missiles.append(Missile("Caldari Navy Cruise Missile", 345, 300, 69, 4.5, 16.55))
-missiles.append(Missile("Precision Cruise Missile", 260, 270, 71, 3.5, 16.55))
-missiles.append(Missile("Fury Cruise Missile", 384, 550, 58, 4.7, 16.55))
-missiles.append(Missile("Heavy Assault Missile", 100, 125, 101, 4.5, 6.4))
+
+if parser.values.cruise_missile:
+    missiles.append(Missile("Cruise Missile", 375, 330, 69, 4.5, 16.55))
+    missiles.append(Missile("Caldari Navy Cruise Missile", 431, 330, 69, 4.5, 16.55))
+    missiles.append(Missile("Precision Cruise Missile", 375, 297, 83, 3.5, 16.55))
+    missiles.append(Missile("Fury Cruise Missile", 525, 567, 58, 4.7, 16.55))
+
+if parser.values.heavy_assault_missile:
+    missiles.append(Missile("Heavy Assault Missile", 100, 125, 101, 4.5, 6.4))
+    missiles.append(Missile("Caldaru Heavy Assault Missile", 115, 125, 101, 4.5, 6.4))
+    missiles.append(Missile("Javelin Heavy Assault Missile", 90, 125, 101, 4.5, 6.4))
+    missiles.append(Missile("Rage Heavy Assault Missile", 135, 215, 87, 4.5, 6.4))
 
 for missile in missiles:
     print(missile)
