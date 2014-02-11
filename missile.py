@@ -127,8 +127,8 @@ if parser.values.cruise_missile:
 if parser.values.heavy_assault_missile:
     missiles.append(Missile("Heavy Assault Missile", 100, 125, 101, 4.5, 6.4))
     missiles.append(Missile("Caldaru Heavy Assault Missile", 115, 125, 101, 4.5, 6.4))
-    missiles.append(Missile("Javelin Heavy Assault Missile", 90, 125, 101, 4.5, 6.4))
-    missiles.append(Missile("Rage Heavy Assault Missile", 135, 215, 87, 4.5, 6.4))
+    missiles.append(Missile("Javelin Heavy Assault Missile", 90, 125, 101, 4.6, 6.4))
+    missiles.append(Missile("Rage Heavy Assault Missile", 135, 215, 87, 4.8, 6.4))
 
 for missile in missiles:
     print(missile)
