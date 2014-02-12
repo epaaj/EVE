@@ -10,6 +10,9 @@ parser.add_option("-c", "--cruise-missile",
 parser.add_option("-a", "--heavy-assault-missile",
         action="store_true", dest="heavy_assault_missile", default=False,
         help="Show Heavy Assault Missile stats")
+parser.add_option("-r", "--rocket",
+        action="store_true", dest="rocket", default=False,
+        help="Show Rocket stats")
 
 (options, args) = parser.parse_args()
 
@@ -126,9 +129,16 @@ if parser.values.cruise_missile:
 
 if parser.values.heavy_assault_missile:
     missiles.append(Missile("Heavy Assault Missile", 100, 125, 101, 4.5, 6.4))
-    missiles.append(Missile("Caldaru Heavy Assault Missile", 115, 125, 101, 4.5, 6.4))
+    missiles.append(Missile("Caldari Navy Heavy Assault Missile", 115, 125, 101, 4.5, 6.4))
     missiles.append(Missile("Javelin Heavy Assault Missile", 90, 125, 101, 4.6, 6.4))
     missiles.append(Missile("Rage Heavy Assault Missile", 135, 215, 87, 4.8, 6.4))
+
+if parser.values.rocket:
+    missiles.append(Missile("Rocket", 33, 20, 150, 3, 4))
+    missiles.append(Missile("Caldari Navy Rocket", 37, 20, 150, 3, 4))
+    missiles.append(Missile("Javelin Heavy Assault Missile", 29.7, 20, 150, 3, 4))
+    missiles.append(Missile("Rage Heavy Assault Missile", 44.6, 34, 129, 3, 4))
+
 
 for missile in missiles:
     print(missile)
