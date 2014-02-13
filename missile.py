@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import math
+import configparser
 from optparse import OptionParser
 
 parser = OptionParser()
@@ -16,77 +17,43 @@ parser.add_option("-r", "--rocket",
 
 (options, args) = parser.parse_args()
 
+config_data = {}
+config = configparser.ConfigParser()
+config.optionxform = str
+config.read("config.cfg")
+for section in config.sections():
+    options = config.options(section)
+    for option in options:
+        print(option)
+        config_data[option] = config.getint(section, option)
+        print(config_data[option])
+
+
+
 class Missile_bonus(object):
     def __init__(self):
-        # Skills
-        # Cruise missile damage: 5%
-        self.cruise_missile = 4
-        # Heavy assault missule damage: 5%
-        self.heavy_assault_missile = 4
-        # Signature radius factor for missile explosions: -5%
-        self.guided_missile_precision = 3
-        # Maximum flight time: 10%
-        self.missile_bombartment = 2
-        # Rate of fire: -2%
-        self.missile_launcher_operation = 5
-        # Maximum velocity: 10%
-        self.missile_projection = 2
-        # Rate of fire: -3%
-        self.rapid_launch = 4
-        # Velocity factor for missiles explosions: 10%
-        self.target_navigation_prediction = 4
-        # Missile damage: 2%
-        self.warhead_upgrades = 3
-
-        # Equipment/Modules
-        #
-        # Missile damage: I: 7%; II: 10%
-        # Rate of fire: I: 7.5%; II: 10.5%
-        self.ballistic_control_system_I = 0
-        self.ballistic_control_system_II = 3
-        #
-        #
-        # Rigs
-        #
-        # Rate of fire: I: -10%; II: -15%; Stacking penalty
-        self.large_bay_loading_accelerator_I = 0
-        self.large_bay_loading_accelerator_II = 0
-        # Missile velocity: I: 15%; II: 20%; Stacking penalty
-        self.large_hydralic_bay_thrusters_I = 0
-        self.large_hydralic_bay_thrusters_II = 0
-        # Flight time: I: 15%; II: 20%
-        self.large_rocket_fuel_cache_partition_I = 0
-        self.large_rocket_fuel_cache_partition_II = 0
-        # Missile damage: I: 10%; II: 15%; Stacking penalty
-        self.large_warhead_calefaction_catalyst_I = 0
-        self.large_warhead_calefaction_catalyst_II = 0
-        # Explosion velocity: I: 15%; II: 20%
-        self.large_warhead_flare_catalyst_I = 0
-        self.large_warhead_flare_catalyst_II = 0
-        # Explosion radius: I: -15%; II: -20%
-        self.large_warhead_rigor_catalyst_I = 0
-        self.large_warhead_rigor_catalyst_II = 0
+        pass
 
     def stacking_penalty(self, n):
         # Bonus penalty for stacking equipment that affects the same attribute
         return 0.5 ** (((n - 1) / 2.22292081) ** 2)
 
     def damage_bonus(self):
-        dmg_bonus = 1 + self.cruise_missile * 0.05
-        dmg_bonus = dmg_bonus * (1 + self.warhead_upgrades * 0.02)
-        dmg_bonus = dmg_bonus * (1.1 ** self.large_warhead_calefaction_catalyst_I)
-        for i in range(self.ballistic_control_system_II):
+        dmg_bonus = 1 + config_data["cruise_missiles"] * 0.05
+        dmg_bonus = dmg_bonus * (1 + config_data["warhead_upgrades"] * 0.02)
+        dmg_bonus = dmg_bonus * (1.1 ** config_data["large_warhead_calefaction_catalyst_I"])
+        for i in range(config_data["ballistic_control_system_II"]):
             dmg_bonus = dmg_bonus * (1 + (10 * self.stacking_penalty(i)) / 100)
         return dmg_bonus
 
     def radius_bonus(self):
-        rad_bonus = 1 - self.guided_missile_precision * 0.05
-        rad_bonus = rad_bonus * (0.85 ** self.large_warhead_rigor_catalyst_I)
+        rad_bonus = 1 - config_data["guided_missile_precision"] * 0.05
+        rad_bonus = rad_bonus * (0.85 ** config_data["large_warhead_rigor_catalyst_I"])
         return rad_bonus
 
     def velocity_bonus(self):
-        vel_bonus = 1 + self.target_navigation_prediction * 0.1
-        vel_bonus = vel_bonus * (1.15 ** self.large_warhead_flare_catalyst_I)
+        vel_bonus = 1 + config_data["target_navigation_prediction"] * 0.1
+        vel_bonus = vel_bonus * (1.15 ** config_data["large_warhead_flare_catalyst_I"])
         return vel_bonus
 
 class Missile(object):

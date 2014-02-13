@@ -1,0 +1,94 @@
+# Skills
+#
+# Damage
+[damage]
+#
+# Cruise missile damage: 5%
+cruise_missiles = 4
+
+# Torpedo damage: 5%
+torpedoes = 4
+
+# Heavy missile damage: 5%
+heavy_missiles = 4
+
+# Heavy assault missile damage: 5%
+heavy_assault_missiles = 4
+
+# Light missile damage: 5%
+light_missiles = 4
+
+# Rocket damage: 5%
+rockets = 4
+
+# All missile damage: 2%
+warhead_upgrades = 4
+
+
+# Rate of fire
+[rate_of_fire]
+#
+# Rate of fire: -2%
+missile_launcher_operation = 5
+
+# Rate of fire: -3%
+rapid_launch = 4
+
+
+# Precision skills
+[precision]
+#
+# Signature radius factor for missile explosions: -5%
+guided_missile_precision = 4
+
+# Velocity factor for missiles explosions: 10%
+target_navigation_prediction = 4
+
+
+# Range
+[range]
+#
+# Maximum velocity: 10%
+missile_projection = 4
+
+# Maximum flight time: 10%
+missile_bombartment = 4
+
+
+
+# Equipment/Modules
+[modules]
+#
+# Missile damage: I: 7%; II: 10%
+# Rate of fire: I: 7.5%; II: 10.5%
+ballistic_control_system_I = 0
+ballistic_control_system_II = 3
+
+
+# Rigs
+[rigs]
+#
+# Rate of fire: I: -10%; II: -15%; Stacking penalty
+large_bay_loading_accelerator_I = 0
+large_bay_loading_accelerator_II = 0
+
+# Missile velocity: I: 15%; II: 20%; Stacking penalty
+large_hydralic_bay_thrusters_I = 0
+large_hydralic_bay_thrusters_II = 0
+
+# Flight time: I: 15%; II: 20%
+large_rocket_fuel_cache_partition_I = 0
+large_rocket_fuel_cache_partition_II = 0
+
+# Missile damage: I: 10%; II: 15%; Stacking penalty
+large_warhead_calefaction_catalyst_I = 0
+large_warhead_calefaction_catalyst_II = 0
+
+# Explosion velocity: I: 15%; II: 20%
+large_warhead_flare_catalyst_I = 0
+large_warhead_flare_catalyst_II = 0
+
+# Explosion radius: I: -15%; II: -20%
+large_warhead_rigor_catalyst_I = 0
+large_warhead_rigor_catalyst_II = 0
+
